@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"> 
+    <h:head>
+        <meta charset="utf-8" />
+        <title>Add event</title>
+    </h:head>
+    <h:body>
+      <h:form>
+         <fieldset>
+         	<legend>Event</legend>
+	     	<h:outputLabel for="nom">Nom <span class="requis">*</span></h:outputLabel>
+	        <h:inputText id="nom" value="#{addCategoryFormBean.category.nom}" required="true" size="20" maxlength="60" />
+	        <h:message id="nomMessage" for="nom" errorClass="erreur" />
+	        <br />
+                
+	        <h:messages globalOnly="true" infoClass="info" />
+	
+	        <h:commandButton value="Ajouter" action="#{addCategoryFormBean.add}" styleClass="sansLabel" />
+	        <br />
+          </fieldset>
+        </h:form> 	
+    </h:body>
+</html>

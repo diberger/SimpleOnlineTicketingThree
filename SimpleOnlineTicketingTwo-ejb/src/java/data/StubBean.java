@@ -11,6 +11,7 @@ import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import metier.Category;
+import metier.Customer;
 import metier.Event;
 
 /**
@@ -36,6 +37,12 @@ public class StubBean {
         Event event = new Event("Suicide collectif","IUT clermont-Fd",new Date(),"Un suicide collectif est la solution",0);
         event.setCategory(festoche);
         em.persist(event);
+        em.flush();
+    }
+    
+    public void loadCustomer(){
+        Customer customer = new Customer("dimitri", "dimitri", true);
+        em.persist(customer);
         em.flush();
     }
     

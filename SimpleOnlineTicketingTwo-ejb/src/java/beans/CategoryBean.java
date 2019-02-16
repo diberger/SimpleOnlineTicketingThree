@@ -11,6 +11,7 @@ import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import metier.Category;
 import metier.Event;
 
 /**
@@ -19,24 +20,16 @@ import metier.Event;
  */
 @Stateless
 @LocalBean
-public class EventBean {
+public class CategoryBean {
 
     @PersistenceContext(unitName="SimpleOnlineTicketingTwo-ejbPU")
     private EntityManager em;
 
-    /*public EventBean() {
-        em = Persistence.createEntityManagerFactory("SimpleOnlineTicketingTwo-ejbPU").createEntityManager();
-    }*/
-    
-    public void save(Event event){
-        em.persist(event);
+    public void save(Category category){
+        em.persist(category);
     }
     
-    public List<Event> findAll(){
-        return (List<Event>)em.createQuery("SELECT e FROM Event e").getResultList();
-    }
-    
-    public Event findOneById(Integer id){
-        return (Event)em.createQuery("SELECT e FROM Event e WHERE e.id = :id").setParameter("id", id).getSingleResult();
+    public List<Category> findAll(){
+        return (List<Category>)em.createQuery("SELECT c FROM Category c").getResultList();
     }
 }

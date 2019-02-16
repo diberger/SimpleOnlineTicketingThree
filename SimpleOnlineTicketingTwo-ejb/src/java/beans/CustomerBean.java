@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import metier.Customer;
+import metier.Event;
 
 /**
  *
@@ -21,6 +22,16 @@ import metier.Customer;
 public class CustomerBean {
     @PersistenceContext(unitName="SimpleOnlineTicketingTwo-ejbPU")
     private EntityManager em;
+    
+    public boolean validate(String nom, String password){
+        try{
+         Customer c = (Customer)em.createQuery("SELECT c FROM Customer c WHERE c.login = :login AND c.password = :password").setParameter("password", password).setParameter("login", nom).getSingleResult();
+         return true;
+        }catch(Exception e){
+            return false;
+        }
+         
+    }
     
     public void save(Customer c){
         em.persist(c);

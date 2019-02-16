@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"> 
+    <h:head>
+        <meta charset="utf-8" />
+        <title>Add event</title>
+    </h:head>
+    <h:body>
+      <h:form>
+         <fieldset>
+         	<legend>Event</legend>
+	     	<h:outputLabel for="description">Description <span class="requis">*</span></h:outputLabel>
+	        <h:inputText id="description" value="#{addEventFormBean.event.description}" required="true" size="20" maxlength="60" />
+	        <h:message id="descriptionMessage" for="description" errorClass="erreur" />
+	        <br />
+                
+                <h:outputLabel for="name">Nom <span class="requis">*</span></h:outputLabel>
+	        <h:inputText id="name" value="#{addEventFormBean.event.name}" required="true" size="20" maxlength="60" />
+	        <h:message id="nameMessage" for="name" errorClass="erreur" />
+	        <br />
+                
+                <h:outputLabel for="place">Place <span class="requis">*</span></h:outputLabel>
+	        <h:inputText id="place" value="#{addEventFormBean.event.place}" required="true" size="20" maxlength="60" />
+	        <h:message id="placeMessage" for="place" errorClass="erreur" />
+	        <br />
+                
+                <h:outputLabel for="price">Price <span class="requis">*</span></h:outputLabel>
+	        <h:inputText id="price" value="#{addEventFormBean.event.price}" required="true" size="20" maxlength="60" />
+	        <h:message id="priceMessage" for="price" errorClass="erreur" />
+	        <br />
+	
+                
+	        <h:messages globalOnly="true" infoClass="info" />
+	
+	        <h:commandButton value="Ajouter" action="#{addEventFormBean.add}" styleClass="sansLabel" />
+	        <br />
+          </fieldset>
+        </h:form> 	
+    </h:body>
+</html>

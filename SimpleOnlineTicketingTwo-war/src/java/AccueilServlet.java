@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 
+import beans.AddEventFormBean;
 import beans.CustomerBean;
 import beans.EventBean;
+import beans.SessionUtils;
 import data.StubBean;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +17,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.Path;
 import metier.Event;
 
 /**
@@ -29,7 +33,7 @@ public class AccueilServlet extends HttpServlet {
     @EJB
     private EventBean eventBean; 
     @EJB
-    private StubBean stubBean; 
+    private StubBean stubBean;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -70,11 +74,37 @@ public class AccueilServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Stub temporaire
         //stubBean.loadCategories();
         //stubBean.loadEvents();
+        //stubBean.loadCustomer();
         try (PrintWriter out = response.getWriter()) {
-        request.setAttribute("events", eventBean.findAll());
-        request.getRequestDispatcher( "homeJsp.jsp" ).forward( request, response );
+        if(request.getParameter("id") != null){
+            try{
+            request.setAttribute("event", eventBean.findOneById(Integer.parseInt(request.getParameter("id"))));
+            request.getRequestDispatcher( "event.jsp" ).forward( request, response );
+            }catch(Exception e){
+                out.println(e.getMessage());
+            }
+        }
+        else {
+            String user = "visiteur";
+            try{
+            HttpSession session = request.getSession();
+            
+            request.setAttribute("events", eventBean.findAll());
+            
+            if(session != null && session.getAttribute("username") != null){
+            user = session.getAttribute("username").toString();
+            }
+            request.setAttribute("user", user);
+            request.getRequestDispatcher( "homeJsp.jsp" ).forward( request, response );
+            }catch(Exception e){
+                out.println(SessionUtils.getSession());
+                out.println(e.getMessage());
+                out.println(user);
+            }
+        }
         }catch(Exception e) {
             
         }
