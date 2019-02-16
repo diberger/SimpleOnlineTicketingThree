@@ -10,4 +10,4 @@
 * Ajout de catégorie
 * Session, login, logout
 * Inscription
-* Details d'évévenement
+* Details d'événement
